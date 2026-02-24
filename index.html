@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview</title>
+<link href="https://www.cjc116.com/css/reset.css" rel="stylesheet">
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生圖書館：讀後心得海報</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;500&display=swap');
+
+        :root {
+            --bg-color: #FDFBF4; /* 米色紙張感 */
+            --text-primary: #3D342F; /* 深咖啡色文字 */
+            --accent-warm: #E69A45; /* 暖橘色重點 */
+            --accent-deep: #2C5F53; /* 復古圖書館綠 */
+            --paper-texture: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABxJREFUGFdjZYACRjYGGICIgSgBKAbj8CtAkwAAEUEA+U5669oAAAAASUVORK5CYII=');
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            background-image: var(--paper-texture);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+            background-color: var(--bg-color);
+        }
+
+        /* Section 1: Hero Poster Header */
+        .hero-section {
+            background: linear-gradient(rgba(44, 95, 83, 0.85), rgba(44, 95, 83, 0.95)), url('https://images.unsplash.com/photo-1568667256549-094345857637?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+            background-size: cover;
+            color: #FFF;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            border-bottom: 8px solid var(--accent-warm);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            font-weight: 300;
+            background-color: rgba(230, 154, 69, 0.9);
+            display: inline-block;
+            padding: 5px 25px;
+            transform: rotate(-1deg);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .author-credit {
+            margin-top: 40px;
+            font-size: 1rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        /* Section 2: The Hook & Book Cover */
+        .hook-section {
+            padding: 60px 40px;
+            background-color: #FFF;
+            /* border-bottom removed to blend with the list section */
+        }
+
+        .hook-text {
+            font-size: 1.8rem;
+            color: var(--accent-deep);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .hook-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .book-cover-wrapper {
+            flex: 0 0 auto;
+        }
+
+        .book-cover-img {
+            max-width: 220px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.25), 2px 2px 5px rgba(255,255,255,0.5) inset;
+            transform: rotate(-2deg);
+            border: 1px solid #eee;
+        }
+
+        .highlight-box {
+            background-color: #F5F1E6;
+            border: 3px solid var(--accent-deep);
+            padding: 30px;
+            position: relative;
+            max-width: 500px;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+            flex: 1;
+        }
+
+        .highlight-box::before {
+            content: "“";
+            font-size: 5rem;
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            color: var(--accent-warm);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .list-intro {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            line-height: 1.8;
+        }
+
+        /* Section 2.5: The Actual Reading List */
+        .reading-list-section {
+            padding: 0 40px 60px 40px;
+            background-color: #FFF;
+            border-bottom: 2px dashed #D3C4B3;
+        }
+
+        .reading-list-card {
+            background-color: #FEFCF5;
+            border: 1px solid #E5DNC;
+            border-left: 10px solid var(--accent-warm); /* 圖書館卡片風格 */
+            padding: 40px 50px;
+            margin: 0 auto;
+            max-width: 650px;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            transform: rotate(1deg);
+        }
+
+        .card-pin {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            filter: drop-shadow(2px 4px 2px rgba(0,0,0,0.2));
+        }
+
+        .reading-list-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #D3C4B3;
+            padding-bottom: 15px;
+        }
+
+        .reading-list-title span {
+            display: block;
+            font-size: 1rem;
+            color: #666;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .reading-list-ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .reading-list-ul li {
+            border-bottom: 1px dashed #D3C4B3;
+            padding: 12px 0;
+            font-size: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .reading-list-ul li:last-child {
+            border-bottom: none;
+        }
+
+        .book-tw {
+            font-weight: 700;
+            color: var(--accent-deep);
+        }
+
+        .book-en {
+            color: #888;
+            font-size: 0.9rem;
+            font-style: italic;
+            font-family: 'Noto Sans TC', sans-serif;
+            text-align: right;
+            padding-left: 15px;
+        }
+
+        .blank-book {
+            color: var(--accent-warm);
+        }
+        
+        .blank-book .book-tw {
+            color: var(--accent-warm);
+        }
+
+        /* Section 3: The Characters (Split Panel) */
+        .characters-section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .char-panel {
+            flex: 1;
+            min-width: 300px;
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        .char-mukesh {
+            background-color: #F2EBD5;
+            border-right: 1px solid #D3C4B3;
+        }
+
+        .char-aleisha {
+            background-color: #E8F1F0;
+        }
+
+        .char-name {
+            font-size: 2rem;
+            color: var(--accent-deep);
+            margin-bottom: 15px;
+        }
+
+        .char-desc {
+            font-size: 1.1rem;
+        }
+
+        .char-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-warm);
+        }
+
+        /* Section 4: Core Takeaways (Poster Grid) */
+        .takeaway-section {
+            padding: 80px 40px;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--accent-deep);
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background-color: var(--accent-warm);
+            margin: 10px auto 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .grid-item {
+            background: #FFF;
+            padding: 40px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--accent-deep);
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .grid-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .grid-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent-deep);
+        }
+
+        /* Section 5: Conclusion Banner */
+        .conclusion-section {
+            background-color: var(--accent-deep);
+            color: #FFF;
+            padding: 80px 40px;
+            text-align: center;
+            background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="20" height="20" fill="none"/><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .conclusion-quote {
+            font-size: 2rem;
+            font-family: 'Noto Serif TC', serif;
+            font-weight: bold;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .conclusion-text {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Footer style decorative end */
+        .footer-deco {
+            height: 40px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--accent-warm),
+                var(--accent-warm) 10px,
+                var(--accent-deep) 10px,
+                var(--accent-deep) 20px
+            );
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .hook-text { font-size: 1.5rem; }
+            
+            /* Mobile layout for hook section */
+            .hook-container { flex-direction: column; }
+            .book-cover-img { max-width: 180px; transform: rotate(0deg); margin-bottom: 20px; }
+            .highlight-box { width: 100%; box-sizing: border-box; }
+
+            /* Mobile layout for reading list */
+            .reading-list-card { padding: 30px 20px; transform: rotate(0deg); }
+            .reading-list-ul li { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .book-en { padding-left: 0; text-align: left; }
+
+            .conclusion-quote { font-size: 1.6rem; }
+            .char-panel { border-right: none; border-bottom: 1px solid #D3C4B3; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Section 1: Hero Header -->
+    <header class="hero-section">
+        <h1 class="hero-title">人生圖書館</h1>
+        <div class="hero-subtitle">一張神祕書單，串起孤獨靈魂的療癒奇蹟</div>
+        <div class="author-credit">原著：莎拉．妮薩．亞當斯 (Sara Nisha Adams) | 讀後心得海報</div>
+    </header>
+
+    <!-- Section 2: The Hook & Book Cover -->
+    <section class="hook-section">
+        <h2 class="hook-text">故事，從夾在書頁裡的一張「閱讀清單」開始...</h2>
+        <div class="hook-container">
+            <div class="book-cover-wrapper">
+                <img src="https://cdn.kobo.com/book-images/f92444d8-9135-47bb-b0a5-9d6491b2c948/180/1000/False/ihjyIQFh1T-0bgf7p5Q5Yg.jpg" alt="人生圖書館 The Reading List 書封" class="book-cover-img">
+            </div>
+            <div class="highlight-box">
+                <p class="list-intro">8 本經典小說，加上 1 本未知的留白，<br>連結了兩個截然不同的人生。</p>
+                <p style="margin-top: 15px; font-style: italic; color: #666;">它沒有生硬的說教，只有無聲的陪伴。<br>這是一劑獻給所有愛書人的溫柔處方箋。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2.5: The Reading List Card -->
+    <section class="reading-list-section">
+        <div class="reading-list-card">
+            <div class="card-pin">📌</div>
+            <h3 class="reading-list-title">以防你需要... <span>(Just in case you need it)</span></h3>
+            <ul class="reading-list-ul">
+                <li><span class="book-tw">1. 《梅岡城故事》</span> <span class="book-en">To Kill a Mockingbird</span></li>
+                <li><span class="book-tw">2. 《蝴蝶夢》</span> <span class="book-en">Rebecca</span></li>
+                <li><span class="book-tw">3. 《追風箏的孩子》</span> <span class="book-en">The Kite Runner</span></li>
+                <li><span class="book-tw">4. 《少年Pi的奇幻漂流》</span> <span class="book-en">Life of Pi</span></li>
+                <li><span class="book-tw">5. 《傲慢與偏見》</span> <span class="book-en">Pride and Prejudice</span></li>
+                <li><span class="book-tw">6. 《小婦人》</span> <span class="book-en">Little Women</span></li>
+                <li><span class="book-tw">7. 《寵兒》</span> <span class="book-en">Beloved</span></li>
+                <li><span class="book-tw">8. 《適婚的女孩》</span> <span class="book-en">A Suitable Boy</span></li>
+                <li class="blank-book"><span class="book-tw">9. _________________</span> <span class="book-en">(留給你的人生之書)</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 3: The Characters -->
+    <section class="characters-section">
+        <div class="char-panel char-mukesh">
+            <div class="char-icon">👴🏾</div>
+            <h3 class="char-name">穆凱許 Mukesh</h3>
+            <p class="char-desc">走不出喪妻之痛的印度裔鰥夫。<br>為了親近愛書的孫女，他鼓起勇氣踏入陌生的圖書館，試圖在文字中尋找妻子的影子。</p>
+        </div>
+        <div class="char-panel char-aleisha">
+            <div class="char-icon">👩🏽‍💻</div>
+            <h3 class="char-name">亞蕾莎 Aleisha</h3>
+            <p class="char-desc">心力交瘁的十七歲圖書館員。<br>青春期本該燦爛，卻被照顧生病母親的重擔壓得喘不過氣。這張書單是她意外獲得的救生圈。</p>
+        </div>
+    </section>
+
+    <!-- Section 4: Key Takeaways (Poster Grid) -->
+    <section class="takeaway-section">
+        <h2 class="section-title">讀後關鍵啟發</h2>
+        <div class="grid-container">
+            <!-- Grid Item 1 -->
+            <div class="grid-item">
+                <span class="grid-icon">🌉</span>
+                <h3 class="grid-title">書籍是連結的橋樑</h3>
+                <p>閱讀不只是為了逃避現實。透過共讀書單上的經典，他們跨越了年齡與文化的鴻溝，建立了深厚的忘年之交。</p>
+            </div>
+            <!-- Grid Item 2 -->
+            <div class="grid-item">
+                <span class="grid-icon">❤️‍🩹</span>
+                <h3 class="grid-title">故事承接現實的痛</h3>
+                <p>面對失去與無力感，我們將創傷投射到小說主角身上，跟著他們經歷心碎與釋懷，從而借來面對明天的勇氣。</p>
+            </div>
+            <!-- Grid Item 3 -->
+            <div class="grid-item">
+                <span class="grid-icon">🏛️</span>
+                <h3 class="grid-title">實體圖書館的溫度</h3>
+                <p>這是一封寫給圖書館的情書。它是平等的庇護所，讓迷惘的人找到指引，讓孤獨的人在書架間相遇。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Conclusion Banner -->
+    <section class="conclusion-section">
+        <div class="conclusion-quote">
+            「即使生活千瘡百孔，<br>只要你願意翻開一本書，就可能獲得展開新生活的契機。」
+        </div>
+        <p class="conclusion-text">
+            《人生圖書館》沒有華麗的魔法，只有日常的溫柔與現實的重量。<br>它提醒我們：閱讀，真的可以拯救人生。
+        </p>
+    </section>
+    
+    <div class="footer-deco"></div>
+</div>
+
+</body>
+</html>
+<script>
+// Error handling
+window.onerror = function(msg, url, line, col, error) {
+  console.error('Error:', msg, 'at line', line);
+  return false;
+};
+
+
+</script>
+</body>
+</html>
